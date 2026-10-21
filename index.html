@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10152b">
+  <title>AI Image Classifier</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- TensorFlow.js and pretrained MobileNet model -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="logo">✦ AI VISION</div>
+      <h1>AI Image <span>Classifier</span></h1>
+      <p>Upload an image and let artificial intelligence discover what's inside.</p>
+      <div class="model-badge">
+        <span class="live-dot"></span>
+        <span id="modelStatus" role="status" aria-live="polite">Loading AI model...</span>
+      </div>
+    </header>
+
+    <section class="workspace">
+      <div class="upload-card">
+        <div class="section-heading">
+          <span class="step">01</span>
+          <div>
+            <h2>Upload image</h2>
+            <p>Choose a JPG, PNG, or WEBP image.</p>
+          </div>
+        </div>
+
+        <label class="drop-zone" for="imageInput" id="dropZone">
+          <img id="preview" alt="Selected image preview" hidden>
+          <div id="uploadPrompt" class="upload-prompt">
+            <div class="upload-icon">↑</div>
+            <h3>Choose an image</h3>
+            <p>Tap here to browse your device</p>
+            <span class="browse-button">Browse files</span>
+          </div>
+        </label>
+
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/jpeg,image/png,image/webp"
+          hidden
+        >
+
+        <p class="file-note" id="fileName">No image selected</p>
+
+        <button id="classifyBtn" class="primary-button" disabled>
+          <span>✦</span> Classify Image
+        </button>
+        <button id="resetBtn" class="secondary-button" hidden>
+          Choose another image
+        </button>
+        <p id="errorMessage" class="error-message" role="alert"></p>
+      </div>
+
+      <div class="results-card">
+        <div class="section-heading">
+          <span class="step">02</span>
+          <div>
+            <h2>AI predictions</h2>
+            <p>See what the model recognizes.</p>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="brain-icon">✧</div>
+          <h3>Ready to analyze</h3>
+          <p>Your top predictions will appear here after you upload an image.</p>
+        </div>
+
+        <div id="loadingState" class="loading-state" hidden>
+          <div class="spinner"></div>
+          <p id="loadingText">Preparing your image...</p>
+        </div>
+
+        <div id="results" hidden>
+          <div class="result-summary">
+            <span class="summary-label">BEST MATCH</span>
+            <h3 id="bestLabel">—</h3>
+            <p id="bestConfidence">—</p>
+          </div>
+
+          <h3 class="prediction-title">Top 3 predictions</h3>
+          <div id="predictionList" class="prediction-list"></div>
+          <p class="disclaimer">
+            Confidence scores indicate the model's predictions, not guaranteed truth.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-strip">
+      <div><span>01</span><p>Upload a photo</p></div>
+      <div><span>02</span><p>AI analyzes it</p></div>
+      <div><span>03</span><p>View predictions</p></div>
+    </section>
+
+    <footer>
+      <p>Built with TensorFlow.js + MobileNet</p>
+      <p>Image classification happens in your browser.</p>
+    </footer>
+  </main>
+</body>
+</html>
